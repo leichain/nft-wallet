@@ -1,7 +1,7 @@
 {
     "name": "nft-wallet",
     "version": "1.0.0",
-    "homepage": "https://github.com/leichain/nft-wallet#readme",
+    "homepage": "https://leichain.github.io/nft-wallet/",
     "description": "",
     "main": "styling.js",
     "type": "module",
