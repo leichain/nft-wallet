@@ -1,0 +1,27 @@
+{
+    "name": "nft-wallet",
+    "version": "1.0.0",
+    "homepage": "https://leichain.github.io/nft-wallet/",
+    "description": "",
+    "main": "styling.js",
+    "type": "module",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/leichain/nft-wallet.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/leichain/nft-wallet/issues"
+    },
+    "homepage": "https://github.com/leichain/nft-wallet#readme",
+    "dependencies": {
+      "gh-pages": "^5.0.0",
+      "jsdom": "^22.1.0",
+      "node-fetch": "^3.3.1"
+    }
+  }
