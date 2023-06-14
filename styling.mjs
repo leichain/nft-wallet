@@ -11,8 +11,29 @@ fetch(apiUrl)
   .then(apiResponse => {
     const nftHoldings = apiResponse.data.items;
 
-    const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>');
+    const dom = new JSDOM('<!DOCTYPE html><html><head><style></style></head><body></body></html>');
     const document = dom.window.document;
+    const style = document.querySelector('style');
+
+    // Add CSS styles
+    style.textContent = `
+      .nft-card {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin: 10px;
+        padding: 10px;
+        width: 300px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      }
+      .nft-card img {
+        width: 100%;
+        height: auto;
+      }
+      .nft-card h2, .nft-card p {
+        margin: 0;
+        padding: 0 0 10px 0;
+      }
+    `;
 
     nftHoldings.forEach((nft) => {
       if (nft.nft_data && nft.nft_data[0] && nft.nft_data[0].external_data) {
@@ -25,6 +46,8 @@ fetch(apiUrl)
 
         // Create and display HTML elements for each NFT
         const nftElement = document.createElement('div');
+        nftElement.className = 'nft-card';
+
         const titleElement = document.createElement('h2');
         const descriptionElement = document.createElement('p');
         const imageElement = document.createElement('img');
@@ -45,5 +68,5 @@ fetch(apiUrl)
         if (err) throw err;
         console.log('Saved!');
     });
-    })
-    .catch(error => console.error('Error fetching data:', error));
+  })
+  .catch(error => console.error('Error fetching data:', error));
