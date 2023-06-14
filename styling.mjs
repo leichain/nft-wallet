@@ -33,14 +33,18 @@ fetch(apiUrl)
     margin: 10px;
     padding: 10px;
     width: 300px;
+    height: 450px; // adjust the height as per your requirements
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .nft-card img {
-    width: 100%;
+    width: 80%; // adjust the width as per your requirements
     height: auto;
   }
-  .nft-card h2, .nft-card p, .nft-card .token-id {
+  .nft-card h2, .nft-card .token-id {
     margin: 0;
     padding: 0 0 10px 0;
   }
@@ -50,8 +54,11 @@ fetch(apiUrl)
     display: -webkit-box;
     -webkit-line-clamp: 3; /* number of lines to show */
     -webkit-box-orient: vertical;
+    margin: 0;
+    padding: 0 0 10px 0;
   }
 `;
+
 
     nftHoldings.forEach((nft) => {
       if (nft.nft_data && nft.nft_data[0] && nft.nft_data[0].external_data && nft.nft_data[0].external_data.name && nft.nft_data[0].external_data.description && nft.nft_data[0].external_data.image) {
