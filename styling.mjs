@@ -4,7 +4,7 @@ import fs from 'fs';
 import dotenv from 'dotenv'
 dotenv.config()
 
-const apiUrl = `https://api.covalenthq.com/v1/eth-mainnet/address/demo.eth/balances_nft/?key=${process.env.COVALENT_API_KEY}`;
+const apiUrl = `https://api.covalenthq.com/v1/eth-mainnet/address/0x063Df4d2daE21A38308c4358666aca6c93eCB961/balances_nft/?key=${process.env.COVALENT_API_KEY}`;
 
 fetch(apiUrl)
   .then(response => response.json())
