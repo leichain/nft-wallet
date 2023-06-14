@@ -11,12 +11,19 @@ fetch(apiUrl)
   .then(apiResponse => {
     const nftHoldings = apiResponse.data.items;
 
-    const dom = new JSDOM('<!DOCTYPE html><html><head><style></style></head><body></body></html>');
+    const dom = new JSDOM('<!DOCTYPE html><html><head><style></style></head><body><div class="nft-grid"></div></body></html>');
     const document = dom.window.document;
     const style = document.querySelector('style');
+    const grid = document.querySelector('.nft-grid');
 
     // Add CSS styles
     style.textContent = `
+      .nft-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px;
+      }
       .nft-card {
         border: 1px solid #ccc;
         border-radius: 8px;
@@ -24,6 +31,7 @@ fetch(apiUrl)
         padding: 10px;
         width: 300px;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        word-wrap: break-word;
       }
       .nft-card img {
         width: 100%;
@@ -60,7 +68,7 @@ fetch(apiUrl)
         nftElement.appendChild(descriptionElement);
         nftElement.appendChild(imageElement);
 
-        document.body.appendChild(nftElement);
+        grid.appendChild(nftElement);
       }
     });
 
