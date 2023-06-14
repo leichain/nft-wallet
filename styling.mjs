@@ -41,6 +41,25 @@ fetch(apiUrl)
         width: 300px;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         word-wrap: break-word;
+        position: relative;
+        overflow: hidden;
+      }
+      .nft-card .description {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        padding: 10px;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .nft-card:hover .description {
+        transform: translateY(0);
       }
       .nft-card img, .nft-card video {
         width: 100%;
@@ -67,6 +86,8 @@ fetch(apiUrl)
         const tokenId = nft.nft_data[0].token_id;
         const name = nft.nft_data[0].external_data.name;
         const imageUrl = nft.nft_data[0].external_data.image;
+        const description = nft.nft_data[0].external_data.description;
+
 
         // Create and display HTML elements for each NFT
         const nftElement = document.createElement('div');
@@ -78,6 +99,10 @@ fetch(apiUrl)
 
         titleElement.textContent = name;
         tokenIdElement.textContent = `Token ID: ${tokenId}`;
+
+        const descriptionElement = document.createElement('div');
+        descriptionElement.className = 'description';
+        descriptionElement.textContent = description;
 
         nftElement.appendChild(titleElement);
 

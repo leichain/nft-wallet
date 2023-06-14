@@ -20,6 +20,25 @@
         width: 300px;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         word-wrap: break-word;
+        position: relative;
+        overflow: hidden;
+      }
+      .nft-card .description {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        padding: 10px;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .nft-card:hover .description {
+        transform: translateY(0);
       }
       .nft-card img, .nft-card video {
         width: 100%;
