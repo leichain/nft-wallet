@@ -36,7 +36,7 @@ fetch(apiUrl)
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         word-wrap: break-word;
       }
-      .nft-card img {
+      .nft-card img, .nft-card video {
         width: 100%;
         height: auto;
       }
@@ -57,16 +57,26 @@ fetch(apiUrl)
         nftElement.className = 'nft-card';
 
         const titleElement = document.createElement('h2');
-        const imageElement = document.createElement('img');
         const tokenIdElement = document.createElement('p');
         tokenIdElement.className = 'token-id';
 
         titleElement.textContent = name;
-        imageElement.src = imageUrl;
         tokenIdElement.textContent = `Token ID: ${tokenId}`;
 
         nftElement.appendChild(titleElement);
-        nftElement.appendChild(imageElement);
+
+        // Check if the file is an mp4
+        if (imageUrl.endsWith('.mp4')) {
+          const videoElement = document.createElement('video');
+          videoElement.src = imageUrl;
+          videoElement.controls = true; // Add video controls
+          nftElement.appendChild(videoElement);
+        } else {
+          const imageElement = document.createElement('img');
+          imageElement.src = imageUrl;
+          nftElement.appendChild(imageElement);
+        }
+
         nftElement.appendChild(tokenIdElement);
 
         grid.appendChild(nftElement);
