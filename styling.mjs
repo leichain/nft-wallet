@@ -4,22 +4,28 @@ import fs from 'fs';
 import dotenv from 'dotenv'
 dotenv.config()
 
-const apiUrl = `https://api.covalenthq.com/v1/eth-mainnet/address/ayybee.eth/balances_nft/?key=${process.env.COVALENT_API_KEY}`;
+const walletAddress = '0x063Df4d2daE21A38308c4358666aca6c93eCB961';
+const apiUrl = `https://api.covalenthq.com/v1/eth-mainnet/address/${walletAddress}/balances_nft/?key=${process.env.COVALENT_API_KEY}`;
 
 fetch(apiUrl)
   .then(response => response.json())
   .then(apiResponse => {
     const nftHoldings = apiResponse.data.items;
 
-    const dom = new JSDOM('<!DOCTYPE html><html><head><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"><style></style></head><body><div class="nft-grid"></div></body></html>');
+    const dom = new JSDOM('<!DOCTYPE html><html><head><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"><style></style></head><body><div class="title-section"></div><div class="nft-grid"></div></body></html>');
     const document = dom.window.document;
     const style = document.querySelector('style');
+    const titleSection = document.querySelector('.title-section');
     const grid = document.querySelector('.nft-grid');
 
     // Add CSS styles
     style.textContent = `
       body {
         font-family: 'Roboto', sans-serif;
+      }
+      .title-section {
+        text-align: center;
+        margin-bottom: 20px;
       }
       .nft-grid {
         display: flex;
@@ -45,6 +51,16 @@ fetch(apiUrl)
         padding: 0 0 10px 0;
       }
     `;
+
+    // Add title and address at the top
+    const titleElement = document.createElement('h1');
+    const addressElement = document.createElement('p');
+
+    titleElement.textContent = 'NFTs';
+    addressElement.textContent = `Wallet Address: ${walletAddress}`;
+
+    titleSection.appendChild(titleElement);
+    titleSection.appendChild(addressElement);
 
     nftHoldings.forEach((nft) => {
       if (nft.nft_data && nft.nft_data[0] && nft.nft_data[0].external_data && nft.nft_data[0].external_data.name && nft.nft_data[0].external_data.image) {
