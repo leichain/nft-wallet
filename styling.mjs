@@ -11,13 +11,16 @@ fetch(apiUrl)
   .then(apiResponse => {
     const nftHoldings = apiResponse.data.items;
 
-    const dom = new JSDOM('<!DOCTYPE html><html><head><style></style></head><body><div class="nft-grid"></div></body></html>');
+    const dom = new JSDOM('<!DOCTYPE html><html><head><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"><style></style></head><body><div class="nft-grid"></div></body></html>');
     const document = dom.window.document;
     const style = document.querySelector('style');
     const grid = document.querySelector('.nft-grid');
 
     // Add CSS styles
     style.textContent = `
+      body {
+        font-family: 'Roboto', sans-serif;
+      }
       .nft-grid {
         display: flex;
         flex-wrap: wrap;
@@ -37,7 +40,7 @@ fetch(apiUrl)
         width: 100%;
         height: auto;
       }
-      .nft-card h2, .nft-card p {
+      .nft-card h2, .nft-card p, .nft-card .token-id {
         margin: 0;
         padding: 0 0 10px 0;
       }
@@ -45,8 +48,6 @@ fetch(apiUrl)
 
     nftHoldings.forEach((nft) => {
       if (nft.nft_data && nft.nft_data[0] && nft.nft_data[0].external_data) {
-        const contractName = nft.contract_name;
-        const tokenSymbol = nft.contract_ticker_symbol;
         const tokenId = nft.nft_data[0].token_id;
         const name = nft.nft_data[0].external_data.name;
         const description = nft.nft_data[0].external_data.description;
@@ -59,14 +60,18 @@ fetch(apiUrl)
         const titleElement = document.createElement('h2');
         const descriptionElement = document.createElement('p');
         const imageElement = document.createElement('img');
+        const tokenIdElement = document.createElement('p');
+        tokenIdElement.className = 'token-id';
 
-        titleElement.textContent = `${name} (${tokenSymbol})`;
+        titleElement.textContent = name;
         descriptionElement.textContent = description;
         imageElement.src = imageUrl;
+        tokenIdElement.textContent = `Token ID: ${tokenId}`;
 
         nftElement.appendChild(titleElement);
         nftElement.appendChild(descriptionElement);
         nftElement.appendChild(imageElement);
+        nftElement.appendChild(tokenIdElement);
 
         grid.appendChild(nftElement);
       }
