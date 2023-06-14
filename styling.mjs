@@ -47,7 +47,7 @@ fetch(apiUrl)
     `;
 
     nftHoldings.forEach((nft) => {
-      if (nft.nft_data && nft.nft_data[0] && nft.nft_data[0].external_data) {
+      if (nft.nft_data && nft.nft_data[0] && nft.nft_data[0].external_data && nft.nft_data[0].external_data.name && nft.nft_data[0].external_data.description && nft.nft_data[0].external_data.image) {
         const tokenId = nft.nft_data[0].token_id;
         const name = nft.nft_data[0].external_data.name;
         const description = nft.nft_data[0].external_data.description;
